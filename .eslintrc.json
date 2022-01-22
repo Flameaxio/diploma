@@ -1,0 +1,15 @@
+{
+	"env": {
+		"browser": true,
+		"es6": true
+	},
+	"extends": ["plugin:prettier/recommended", "plugin:vue/essential"],
+	"globals": {
+		"Atomics": "readonly",
+		"SharedArrayBuffer": "readonly"
+	},
+	"rules": {
+		"no-debugger": "error"
+	},
+	"plugins": ["vue"]
+}

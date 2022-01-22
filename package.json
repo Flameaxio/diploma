@@ -1,5 +1,44 @@
 {
   "name": "cardwalls",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@babel/core": "^7.16.12",
+    "@rails/webpacker": "^5.4.3",
+    "babel-loader": "^8.2.3",
+    "css-loader": "5",
+    "postcss": "8",
+    "postcss-loader": "3",
+    "style-loader": "2",
+    "vue": "^2.6.14",
+    "vue-loader": "^15.9.8",
+    "vue-template-compiler": "^2.6.14",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "devDependencies": {
+    "eslint": "^8.7.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.2.2",
+    "prettier": "^2.5.1",
+    "webpack-dev-server": "^3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{html,css,less,ejs}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
 }
