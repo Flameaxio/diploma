@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+ws = Workspace.create(name: 'Test Workspace')
+ws.columns.create(name: 'Open')
+ws.columns.create(name: 'In progress')
+ws.columns.create(name: 'Review')
+ws.columns.create(name: 'Closed')
