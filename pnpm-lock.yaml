@@ -2,37 +2,61 @@ lockfileVersion: 5.3
 
 specifiers:
   '@babel/core': ^7.16.12
+  '@babel/runtime': ^7.16.7
+  '@mdi/font': ^6.5.95
   '@rails/webpacker': ^5.4.3
+  axios: ^0.25.0
   babel-loader: ^8.2.3
+  babel-plugin-transform-runtime: ^6.23.0
+  babel-runtime: ^6.26.0
+  babel-runtime-regenerator: ^7.8.4
   css-loader: '5'
   eslint: ^8.7.0
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^4.0.0
   eslint-plugin-vue: ^8.3.0
+  file-loader: ^6.2.0
   husky: ^7.0.4
   lint-staged: ^12.2.2
+  material-design-icons-iconfont: ^6.1.1
   postcss: '8'
   postcss-loader: '3'
   prettier: ^2.5.1
+  sass-loader: '10'
   style-loader: '2'
   vue: ^2.6.14
+  vue-easy-dnd: ^1.22.0
   vue-loader: ^15.9.8
   vue-template-compiler: ^2.6.14
+  vuetify: ^2.6.2
+  vuex: ^3.6.2
   webpack: ^4.46.0
   webpack-cli: ^3.3.12
   webpack-dev-server: ^3
 
 dependencies:
   '@babel/core': 7.16.12
+  '@babel/runtime': 7.16.7
+  '@mdi/font': 6.5.95
   '@rails/webpacker': 5.4.3
+  axios: 0.25.0
   babel-loader: 8.2.3_2ca4133eaad1ede48c0159d2a9c3555f
+  babel-plugin-transform-runtime: 6.23.0
+  babel-runtime: 6.26.0
+  babel-runtime-regenerator: 7.8.4
   css-loader: 5.2.7_webpack@4.46.0
+  file-loader: 6.2.0_webpack@4.46.0
+  material-design-icons-iconfont: 6.1.1
   postcss: 8.4.5
   postcss-loader: 3.0.0
+  sass-loader: 10.1.1_webpack@4.46.0
   style-loader: 2.0.0_webpack@4.46.0
   vue: 2.6.14
+  vue-easy-dnd: 1.22.0
   vue-loader: 15.9.8_cd7d3296ac462ab2aecfca1edf15e195
   vue-template-compiler: 2.6.14
+  vuetify: 2.6.2_vue@2.6.14
+  vuex: 3.6.2_vue@2.6.14
   webpack: 4.46.0_webpack-cli@3.3.12
   webpack-cli: 3.3.12_webpack@4.46.0
 
@@ -1231,6 +1255,10 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
+  /@mdi/font/6.5.95:
+    resolution: {integrity: sha512-ES5rj6J39FUkHe/b3C9SJs8bqIungYhuU7rBINTBaHOv/Ce4RCb3Gw08CZVl32W33UEkgRkzyWaIedV4at+QHg==}
+    dev: false
+
   /@npmcli/fs/1.1.0:
     resolution: {integrity: sha512-VhP1qZLXcrXRIaPoqb4YA55JQxLNF3jNR4T55IdOJa3+IFJKNYHtPvtXx8slmeMavj37vCzCfrqQM1vWLsYKLA==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16}
@@ -1710,6 +1738,14 @@ packages:
       postcss-value-parser: 4.2.0
     dev: false
 
+  /axios/0.25.0:
+    resolution: {integrity: sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==}
+    dependencies:
+      follow-redirects: 1.14.7
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /babel-loader/8.2.3_2ca4133eaad1ede48c0159d2a9c3555f:
     resolution: {integrity: sha512-n4Zeta8NC3QAsuyiizu0GkmRcQ6clkV9WFUnUf1iXP//IeSKbWjofW3UHyZVwlOB4y039YQKefawyTn64Zwbuw==}
     engines: {node: '>= 8.9'}
@@ -1773,6 +1809,25 @@ packages:
       '@babel/helper-define-polyfill-provider': 0.3.1_@babel+core@7.16.12
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /babel-plugin-transform-runtime/6.23.0:
+    resolution: {integrity: sha1-iEkNRGUC6puOfvsP4J7E2ZR5se4=}
+    dependencies:
+      babel-runtime: 6.26.0
+    dev: false
+
+  /babel-runtime-regenerator/7.8.4:
+    resolution: {integrity: sha512-xFI/tNhl0ZqGRg5XGlKdx3Tr9Z49q46MtIC4LivO6+S59Ii4mLKTu3UX8XCTCne80aj8aNcV16IZmj5cwT8lqA==}
+    dependencies:
+      regenerator-runtime: 0.13.9
+    dev: false
+
+  /babel-runtime/6.26.0:
+    resolution: {integrity: sha1-llxwWGaOgrVde/4E/yM3vItWR/4=}
+    dependencies:
+      core-js: 2.6.12
+      regenerator-runtime: 0.11.1
     dev: false
 
   /balanced-match/1.0.2:
@@ -2399,6 +2454,12 @@ packages:
     dependencies:
       browserslist: 4.19.1
       semver: 7.0.0
+    dev: false
+
+  /core-js/2.6.12:
+    resolution: {integrity: sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==}
+    deprecated: core-js@<3.4 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Please, upgrade your dependencies to the actual version of core-js.
+    requiresBuild: true
     dev: false
 
   /core-js/3.20.3:
@@ -3490,7 +3551,7 @@ packages:
       readable-stream: 2.3.7
     dev: false
 
-  /follow-redirects/1.14.7_debug@4.3.3:
+  /follow-redirects/1.14.7:
     resolution: {integrity: sha512-+hbxoLbFMbRKDwohX8GkTataGqO6Jb7jGwpAlwgy2bIz25XtRm7KEzJM76R1WiNT5SwZkX4Y75SwBolkpmE7iQ==}
     engines: {node: '>=4.0'}
     peerDependencies:
@@ -3498,9 +3559,6 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
-    dependencies:
-      debug: 4.3.3_supports-color@6.1.0
-    dev: true
 
   /for-in/1.0.2:
     resolution: {integrity: sha1-gQaNKVqBQuwKxybG4iAMMPttXoA=}
@@ -3876,7 +3934,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.14.7_debug@4.3.3
+      follow-redirects: 1.14.7
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -4635,6 +4693,10 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       object-visit: 1.0.1
+
+  /material-design-icons-iconfont/6.1.1:
+    resolution: {integrity: sha512-nkoXybeXoofanNagj4tbM6+/LALWpWxYX5ee861to5VQrKgb0/TskTw28Svwn0OGDKajuqK7ShFOsIBxIygGKA==}
+    dev: false
 
   /md5.js/1.3.5:
     resolution: {integrity: sha512-xitP+WxNPcTTOgnTJcrhM0xvdPepipPSf3I8EIpGKeFLjt3PlJLIDG3u8EX53ZIubkb+5U2+3rELYpEhHhzdkg==}
@@ -6264,6 +6326,10 @@ packages:
       picomatch: 2.3.1
     dev: false
 
+  /reflect-metadata/0.1.13:
+    resolution: {integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==}
+    dev: false
+
   /regenerate-unicode-properties/9.0.0:
     resolution: {integrity: sha512-3E12UeNSPfjrgwjkR81m5J7Aw/T55Tu7nUyZVQYCKEOs+2dkxEY+DpPtZzO4YruuiPb7NkYLVcyJC4+zCbk5pA==}
     engines: {node: '>=4'}
@@ -6273,6 +6339,10 @@ packages:
 
   /regenerate/1.4.2:
     resolution: {integrity: sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==}
+    dev: false
+
+  /regenerator-runtime/0.11.1:
+    resolution: {integrity: sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==}
     dev: false
 
   /regenerator-runtime/0.13.9:
@@ -6479,6 +6549,30 @@ packages:
       loader-utils: 2.0.2
       neo-async: 2.6.2
       sass: 1.49.0
+      schema-utils: 3.1.1
+      semver: 7.3.5
+      webpack: 4.46.0_webpack-cli@3.3.12
+    dev: false
+
+  /sass-loader/10.1.1_webpack@4.46.0:
+    resolution: {integrity: sha512-W6gVDXAd5hR/WHsPicvZdjAWHBcEJ44UahgxcIE196fW2ong0ZHMPO1kZuI5q0VlvMQZh32gpv69PLWQm70qrw==}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      fibers: '>= 3.1.0'
+      node-sass: ^4.0.0 || ^5.0.0
+      sass: ^1.3.0
+      webpack: ^4.36.0 || ^5.0.0
+    peerDependenciesMeta:
+      fibers:
+        optional: true
+      node-sass:
+        optional: true
+      sass:
+        optional: true
+    dependencies:
+      klona: 2.0.5
+      loader-utils: 2.0.2
+      neo-async: 2.6.2
       schema-utils: 3.1.1
       semver: 7.3.5
       webpack: 4.46.0_webpack-cli@3.3.12
@@ -7441,6 +7535,23 @@ packages:
     resolution: {integrity: sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==}
     dev: false
 
+  /vue-class-component/7.2.6_vue@2.6.14:
+    resolution: {integrity: sha512-+eaQXVrAm/LldalI272PpDe3+i4mPis0ORiMYxF6Ae4hyuCh15W8Idet7wPUEs4N4YptgFHGys4UrgNQOMyO6w==}
+    peerDependencies:
+      vue: ^2.0.0
+    dependencies:
+      vue: 2.6.14
+    dev: false
+
+  /vue-easy-dnd/1.22.0:
+    resolution: {integrity: sha512-+tmVnnmhYErw3vfpiNhggu/7CPfFVj50gmxqEadnRhqIxcYArlC2zYtRp6FrxaIsD9L7saIOMOECyndnzsJ9Lg==}
+    dependencies:
+      reflect-metadata: 0.1.13
+      vue: 2.6.14
+      vue-class-component: 7.2.6_vue@2.6.14
+      vue-property-decorator: 8.5.1_vue@2.6.14
+    dev: false
+
   /vue-eslint-parser/8.1.0_eslint@8.7.0:
     resolution: {integrity: sha512-R8Pl6MSvuU81JKyUguexcABQxfM51Q2ZJVBX0TrKiLltPB+haVLp4hfuR5msiu9oqpsQkaV+TF18r4CBw9c9qg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -7486,6 +7597,15 @@ packages:
       webpack: 4.46.0_webpack-cli@3.3.12
     dev: false
 
+  /vue-property-decorator/8.5.1_vue@2.6.14:
+    resolution: {integrity: sha512-O6OUN2OMsYTGPvgFtXeBU3jPnX5ffQ9V4I1WfxFQ6dqz6cOUbR3Usou7kgFpfiXDvV7dJQSFcJ5yUPgOtPPm1Q==}
+    peerDependencies:
+      vue: '*'
+    dependencies:
+      vue: 2.6.14
+      vue-class-component: 7.2.6_vue@2.6.14
+    dev: false
+
   /vue-style-loader/4.1.3:
     resolution: {integrity: sha512-sFuh0xfbtpRlKfm39ss/ikqs9AbKCoXZBpHeVZ8Tx650o0k0q/YCM7FRvigtxpACezfq6af+a7JeqVTWvncqDg==}
     dependencies:
@@ -7506,6 +7626,22 @@ packages:
 
   /vue/2.6.14:
     resolution: {integrity: sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==}
+    dev: false
+
+  /vuetify/2.6.2_vue@2.6.14:
+    resolution: {integrity: sha512-nx3uZkO8MZNMshUEh1xKaQ1hQYepNwWFn3FVxKt+XBVf7ZFscd0GS/a3KZo4B3baXQmziCQAZKNIQF5IWeaIUw==}
+    peerDependencies:
+      vue: ^2.6.4
+    dependencies:
+      vue: 2.6.14
+    dev: false
+
+  /vuex/3.6.2_vue@2.6.14:
+    resolution: {integrity: sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw==}
+    peerDependencies:
+      vue: ^2.0.0
+    dependencies:
+      vue: 2.6.14
     dev: false
 
   /watchpack-chokidar2/2.0.1:

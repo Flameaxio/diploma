@@ -3,5 +3,7 @@
 Rails.application.routes.draw do
   root to: 'homepage#show'
   
-  resources :workspaces
+  resources :workspaces do
+    post :move_card, on: :member
+  end
 end

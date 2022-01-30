@@ -4,7 +4,7 @@ class Card < ApplicationRecord
   belongs_to :workspace
   belongs_to :column
 
-  before_save :assign_scoped_id
+  before_create :assign_scoped_id
 
   private
 

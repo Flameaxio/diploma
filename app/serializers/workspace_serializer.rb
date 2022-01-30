@@ -4,5 +4,9 @@ class WorkspaceSerializer
   include FastJsonapi::ObjectSerializer
   set_key_transform :camel_lower
 
-  attributes :name, :columns, :cards
+  attributes :name
+
+  attribute :columns do |object|
+    ColumnSerializer.new(object.columns).serializable_hash[:data].map{ |c| c[:attributes] }
+  end
 end
