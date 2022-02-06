@@ -9,6 +9,7 @@ Vue.use(Vuetify)
 Vue.component('workspaceView', WorkspaceView)
 
 document.addEventListener('DOMContentLoaded', () => {
+	console.log('workspace')
 	new Vue({
 		el: '[data-behavior=workspace]',
 		vuetify: new Vuetify({ icons: { iconfont: 'mdi' } }),

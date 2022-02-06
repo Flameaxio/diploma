@@ -7,6 +7,7 @@ Vue.use(Vuetify)
 Vue.component('workspacesView', WorkspacesView)
 
 document.addEventListener('DOMContentLoaded', () => {
+	console.log('workspaces')
 	new Vue({
 		el: '[data-behavior=workspaces]',
 		vuetify: new Vuetify(),
