@@ -12,8 +12,4 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require_tree .
-
-const Turbolinks = require('turbolinks')
-Turbolinks.start()

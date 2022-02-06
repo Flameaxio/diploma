@@ -50,5 +50,4 @@ test:
 production:
   <<: *default
   database: cardwalls_production
-  username: cardwalls
-  password: <%= ENV['CARDWALLS_DATABASE_PASSWORD'] %>
+  url: ENV['JAWSDB_URL']
