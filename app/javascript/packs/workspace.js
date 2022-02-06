@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.esm'
+import Vue from 'vue'
 import WorkspaceView from '../workspace/WorkspaceView.vue'
 import Vuetify from 'vuetify'
 import store from '../workspace/store'
