@@ -50,4 +50,4 @@ test:
 production:
   <<: *default
   database: cardwalls_production
-  url: ENV['JAWSDB_URL']
+  url: <%= ENV.fetch('JAWSDB_URL') %>
