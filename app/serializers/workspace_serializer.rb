@@ -7,6 +7,6 @@ class WorkspaceSerializer
   attributes :name
 
   attribute :columns do |object|
-    ColumnSerializer.new(object.columns).serializable_hash[:data].map{ |c| c[:attributes] }
+    ColumnSerializer.new(object.columns).serializable_hash[:data].map { |c| c[:attributes] }
   end
 end
