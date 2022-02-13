@@ -31,6 +31,11 @@ export default new Vuex.Store({
 				}
 			)
 			commit('setWorkspace', resp.data.data.attributes)
+		},
+		async loadTicket({ commit }, id) {
+			const url = `${window.location.pathname}/cards/${id}.json`
+			const resp = await axios.get(url)
+			return resp.data.data.attributes
 		}
 	},
 	mutations: {

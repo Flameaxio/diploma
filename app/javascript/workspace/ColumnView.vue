@@ -10,7 +10,7 @@
 		<div class="ticket-list">
 			<drop @drop="insert" :class="`column-${column.id}`">
 				<drag v-for="ticket in column.cards" :data="ticket" :key="ticket.id">
-					<ticket-view :ticket="ticket" />
+					<ticket-view :ticket="ticket" @open="$emit('open', $event)" />
 				</drag>
 			</drop>
 		</div>
@@ -18,9 +18,10 @@
 </template>
 
 <script>
-import { Drag, DropList, Drop } from 'vue-easy-dnd'
+import { Drag, Drop } from 'vue-easy-dnd'
 import TicketView from './TicketView'
 import { mapActions } from 'vuex'
+import CardDetailsView from '../shared/CardDetailsView.vue'
 
 export default {
 	components: { TicketView, Drag, Drop },

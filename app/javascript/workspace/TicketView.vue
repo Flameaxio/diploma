@@ -1,8 +1,10 @@
 <template>
-	<div class="ticket-wrapper">
-		<span class="title">{{ ticket.title }}</span>
-		<div class="footer">
-			<span class="scoped-id">#{{ ticket.scoped_id }}</span>
+	<div>
+		<div class="ticket-wrapper" @click="$emit('open', ticket)">
+			<span class="title">{{ ticket.title }}</span>
+			<div class="footer">
+				<span class="scoped-id">#{{ ticket.scopedId }}</span>
+			</div>
 		</div>
 	</div>
 </template>
