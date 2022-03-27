@@ -7,7 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 ws = Workspace.create(name: 'Test Workspace')
-ws.columns.create(name: 'Open')
+open = ws.columns.create(name: 'Open')
 ws.columns.create(name: 'In progress')
 ws.columns.create(name: 'Review')
 ws.columns.create(name: 'Closed')
+open.cards.create(title: 'Test', body: 'Test', workspace: ws)
