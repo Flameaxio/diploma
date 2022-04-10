@@ -9,4 +9,8 @@ class CardSerializer
   attribute :status do |object|
     object.column.name
   end
+
+  attribute :card_logs do |object|
+    CardLogSerializer.new(object.card_logs).serializable_hash[:data].map { |c| c[:attributes] }
+  end
 end

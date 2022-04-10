@@ -21,14 +21,17 @@
 		<div class="details-group">
 			<div class="title">{{ cardInfo.title }}</div>
 			<div class="body">{{ cardInfo.body }}</div>
+			<div class="history"><MessageView :card-log="cardInfo.cardLogs[0]" /></div>
 		</div>
 	</div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import MessageView from './MessageView'
 
 export default {
+	components: { MessageView },
 	props: {
 		card: { type: Object, required: true },
 		columns: { type: Array, required: true }
@@ -61,6 +64,26 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss">
+.v-select__slot {
+	display: flex;
+	flex-direction: row;
+}
+.v-autocomplete__content {
+	position: absolute;
+}
+
+.v-select-list {
+	background: white;
+	border: 1px solid black;
+	border-radius: 3px;
+}
+
+.v-list-item__title {
+	cursor: pointer;
+}
+</style>
 
 <style lang="scss" scoped>
 .main {
@@ -96,6 +119,11 @@ export default {
 		margin-top: 16px;
 		font-size: 16px;
 	}
+	.history {
+		margin-top: 20px;
+		border-top: 1px solid black;
+		padding-top: 20px;
+	}
 }
 
 .list-item {
@@ -112,25 +140,5 @@ export default {
 		display: flex;
 		flex-direction: row;
 	}
-}
-</style>
-
-<style lang="scss">
-.v-select__slot {
-	display: flex;
-	flex-direction: row;
-}
-.v-autocomplete__content {
-	position: absolute;
-}
-
-.v-select-list {
-	background: white;
-	border: 1px solid black;
-	border-radius: 3px;
-}
-
-.v-list-item__title {
-	cursor: pointer;
 }
 </style>

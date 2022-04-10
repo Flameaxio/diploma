@@ -3,6 +3,7 @@
 class Card < ApplicationRecord
   belongs_to :workspace
   belongs_to :column
+  has_many :card_logs
 
   before_create :assign_scoped_id
 
