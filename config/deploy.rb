@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.17.0"
+lock '~> 3.17.0'
 
 set :rvm_ruby_version, '2.5.1'
 
@@ -12,7 +14,7 @@ set :nvm_node, 'v12.22.11'
 set :nvm_map_bins, %w{node npm yarn}
 set :nvm_custom_path, '/home/deploy/.nvm'
 
-set :bundle_flags, ""
+set :bundle_flags, ''
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -48,7 +50,7 @@ set :bundle_flags, ""
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
-append :linked_files, "config/master.key"
+append :linked_files, 'config/master.key'
 
 namespace :deploy do
   namespace :check do

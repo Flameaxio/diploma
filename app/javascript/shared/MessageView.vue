@@ -1,10 +1,12 @@
 <template>
 	<div class="wrapper">
 		<div class="left">
-			<div class="by">By User</div>
-			<div class="text">{{ cardLog.message }}</div>
+			<div class="by">
+				By <strong style="color: red">{{ cardLog.performedBy }}</strong>
+			</div>
+			<div v-html="cardLog.message" class="text" />
 		</div>
-		<div class="right">{{ cardLog.createdAt }}</div>
+		<div class="right">{{ new Date(cardLog.createdAt).toLocaleString('sv-SE') }}</div>
 	</div>
 </template>
 

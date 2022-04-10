@@ -27,7 +27,9 @@ specifiers:
   vue: ^2.6.14
   vue-easy-dnd: ^1.22.0
   vue-loader: ^15.9.8
+  vue-scrollto: ^2.20.0
   vue-template-compiler: ^2.6.14
+  vue-trix: ^1.2.0
   vuetify: ^2.6.2
   vuex: ^3.6.2
   webpack: ^4.46.0
@@ -54,7 +56,9 @@ dependencies:
   vue: 2.6.14
   vue-easy-dnd: 1.22.0
   vue-loader: 15.9.8_cd7d3296ac462ab2aecfca1edf15e195
+  vue-scrollto: 2.20.0
   vue-template-compiler: 2.6.14
+  vue-trix: 1.2.0
   vuetify: 2.6.2_vue@2.6.14
   vuex: 3.6.2_vue@2.6.14
   webpack: 4.46.0_webpack-cli@3.3.12
@@ -1852,6 +1856,10 @@ packages:
   /batch/0.6.1:
     resolution: {integrity: sha1-3DQxT05nkxgJP8dgJyUl+UvyXBY=}
     dev: true
+
+  /bezier-easing/2.1.0:
+    resolution: {integrity: sha1-wE3+i5JtbsrKGBPWn/F5t8ICXYY=}
+    dev: false
 
   /big.js/5.2.2:
     resolution: {integrity: sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==}
@@ -7325,6 +7333,10 @@ packages:
     engines: {node: '>=0.6'}
     dev: true
 
+  /trix/1.3.1:
+    resolution: {integrity: sha512-BbH6mb6gk+AV4f2as38mP6Ucc1LE3OD6XxkZnAgPIduWXYtvg2mI3cZhIZSLqmMh9OITEpOBCCk88IVmyjU7bA==}
+    dev: false
+
   /ts-pnp/1.2.0:
     resolution: {integrity: sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==}
     engines: {node: '>=6'}
@@ -7606,6 +7618,12 @@ packages:
       vue-class-component: 7.2.6_vue@2.6.14
     dev: false
 
+  /vue-scrollto/2.20.0:
+    resolution: {integrity: sha512-7i+AGKJTThZnMEkhIPgrZjyAX+fXV7/rGdg+CV283uZZwCxwiMXaBLTmIc5RTA4uwGnT+E6eJle3mXQfM2OD3A==}
+    dependencies:
+      bezier-easing: 2.1.0
+    dev: false
+
   /vue-style-loader/4.1.3:
     resolution: {integrity: sha512-sFuh0xfbtpRlKfm39ss/ikqs9AbKCoXZBpHeVZ8Tx650o0k0q/YCM7FRvigtxpACezfq6af+a7JeqVTWvncqDg==}
     dependencies:
@@ -7622,6 +7640,12 @@ packages:
 
   /vue-template-es2015-compiler/1.9.1:
     resolution: {integrity: sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==}
+    dev: false
+
+  /vue-trix/1.2.0:
+    resolution: {integrity: sha512-AWqPGa4ZsNdo2B+vkS3zI0uTDFDNqXUvOqZRPB+BoE0/LXj+SCiUH3lx6qDdDanPGzSf0QNWp3fDutba6Z7Z9A==}
+    dependencies:
+      trix: 1.3.1
     dev: false
 
   /vue/2.6.14:

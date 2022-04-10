@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import axios from 'axios'
 Vue.use(Vuex)
 
+const csrf = document.querySelector("meta[name='csrf-token']").getAttribute('content')
+
 export default new Vuex.Store({
 	state: {
 		workspace: {}
@@ -14,9 +16,6 @@ export default new Vuex.Store({
 			commit('setWorkspace', resp.data.data.attributes)
 		},
 		async moveTicket({ commit }, { id, toId }) {
-			const csrf = document
-				.querySelector("meta[name='csrf-token']")
-				.getAttribute('content')
 			const url = `${window.location.pathname}/move_card`
 			const resp = await axios.post(
 				url,
@@ -35,6 +34,19 @@ export default new Vuex.Store({
 		async loadTicket({ commit }, id) {
 			const url = `${window.location.pathname}/cards/${id}.json`
 			const resp = await axios.get(url)
+			return resp.data.data.attributes
+		},
+		async postMessage({ commit }, { id, message }) {
+			const url = `${window.location.pathname}/cards/${id}/post_message`
+			const resp = await axios.post(
+				url,
+				{ message },
+				{
+					headers: {
+						'X-CSRF-Token': csrf
+					}
+				}
+			)
 			return resp.data.data.attributes
 		}
 	},

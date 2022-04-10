@@ -27,7 +27,8 @@ class WorkspacesController < ApplicationController
     if @card.update(column_id: params[:to_id])
       @card.card_logs.create(action_type: :move,
                              message: CardLog::DEFAULT_MESSAGES.call(from: from,
-                                                                     to: @card.column.name)[:move])
+                                                                     to: @card.column.name)[:move],
+                             performed_by: current_user)
       render json: WorkspaceSerializer.new(@workspace).serializable_hash
     else
       render head(:unprocessable_entity)

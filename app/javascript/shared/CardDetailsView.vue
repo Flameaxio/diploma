@@ -21,7 +21,18 @@
 		<div class="details-group">
 			<div class="title">{{ cardInfo.title }}</div>
 			<div class="body">{{ cardInfo.body }}</div>
-			<div class="history"><MessageView :card-log="cardInfo.cardLogs[0]" /></div>
+			<div class="history" ref="container">
+				<div class="messages" :key="cardLog.id" v-for="cardLog in cardInfo.cardLogs">
+					<MessageView :card-log="cardLog" />
+				</div>
+				<div class="editor">
+					<VueTrix v-model="messageContent" placeholder="Enter content" />
+					<div class="actions">
+						<v-btn color="error" rounded @click="messageContent = ''">Clear</v-btn
+						><v-btn color="primary" rounded @click="submitMessage">Send</v-btn>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -29,9 +40,10 @@
 <script>
 import { mapActions } from 'vuex'
 import MessageView from './MessageView'
+import VueTrix from 'vue-trix'
 
 export default {
-	components: { MessageView },
+	components: { MessageView, VueTrix },
 	props: {
 		card: { type: Object, required: true },
 		columns: { type: Array, required: true }
@@ -40,18 +52,33 @@ export default {
 		return {
 			cardInfo: {},
 			loading: true,
-			selectedStatus: ''
+			selectedStatus: '',
+			messageContent: ''
 		}
 	},
-	async mounted() {
+	async created() {
 		this.cardInfo = await this.loadTicket(this.card.id)
 		this.selectedStatus = this.cardInfo.status
 		this.loading = false
 	},
+	mounted() {
+		setTimeout(this.scrollToElement, 50)
+	},
 	methods: {
-		...mapActions(['loadTicket']),
+		...mapActions(['loadTicket', 'postMessage']),
 		formattedDateTime(dateString) {
 			return new Date(dateString).toLocaleString('sv-SE') // e.g. 2022-02-13 13:17:43
+		},
+		async submitMessage() {
+			this.cardInfo.cardLogs.push(
+				await this.postMessage({ id: this.card.id, message: this.messageContent })
+			)
+			this.messageContent = ''
+		},
+		scrollToElement() {
+			const container = this.$refs.container
+
+			container.scrollTop = container.scrollHeight
 		}
 	},
 	computed: {
@@ -69,6 +96,7 @@ export default {
 .v-select__slot {
 	display: flex;
 	flex-direction: row;
+	height: 20px;
 }
 .v-autocomplete__content {
 	position: absolute;
@@ -123,6 +151,24 @@ export default {
 		margin-top: 20px;
 		border-top: 1px solid black;
 		padding-top: 20px;
+		overflow-y: scroll;
+		& > * {
+			margin-top: 15px;
+		}
+	}
+	.editor {
+		.actions {
+			margin-top: 15px;
+			display: flex;
+			width: 100%;
+			flex-direction: row-reverse;
+
+			button {
+				color: white;
+				margin-left: 10px;
+				border-radius: 5px;
+			}
+		}
 	}
 }
 

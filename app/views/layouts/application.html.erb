@@ -8,6 +8,11 @@
   </head>
 
   <body>
+  <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>" style="max-width: 100vw;">
+      <%= value %>
+    </div>
+  <% end %>
     <div class="main-container">
       <%= yield %>
     </div>

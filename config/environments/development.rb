@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -61,4 +63,7 @@ Rails.application.configure do
 
   # Make the webpacker default assets host for the app
   config.x.webpacker[:dev_server_host] = 'http://localhost:8080'
+
+  # Action Mailer setup for devise
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end

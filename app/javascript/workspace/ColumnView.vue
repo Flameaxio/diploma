@@ -59,7 +59,6 @@ export default {
 .header {
 	width: calc(100% + 10px);
 	margin-left: -5px;
-	height: 40px;
 	border-bottom: 1px solid #b4b9b9;
 }
 
