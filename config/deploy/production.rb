@@ -14,10 +14,6 @@ set :branch, 'master'
 append :linked_dirs, 'tmp/pids', 'tmp/sockets', 'public/uploads'
 append :linked_files, 'config/database.yml'
 
-set :default_env, {
-  'SENDGRID_API_KEY' => ENV['SENDGRID_API_KEY']
-}
-
 # role-based syntax
 # ==================
 

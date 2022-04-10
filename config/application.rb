@@ -19,7 +19,7 @@ module Cardwalls
     # the framework and any gems in your application.
     config.action_mailer.delivery_method = :sendgrid_actionmailer
     config.action_mailer.sendgrid_actionmailer_settings = {
-      api_key: ENV['SENDGRID_API_KEY'],
+      api_key: Rails.application.credentials.secret_key_base,
       raise_delivery_errors: true
     }
   end
