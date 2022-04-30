@@ -10,6 +10,7 @@ server 'flameaxe.me:25565', user: 'deploy', roles: %w{app db web}
 # server "db.example.com", user: "deploy", roles: %w{db}
 
 set :branch, 'master'
+set_default :sendgrid_api_key, ENV['SENDGRID_API_KEY']
 
 append :linked_dirs, 'tmp/pids', 'tmp/sockets', 'public/uploads'
 append :linked_files, 'config/database.yml'

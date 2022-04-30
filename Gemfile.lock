@@ -247,11 +247,9 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
-    sendgrid-actionmailer (3.2.0)
-      mail (~> 2.7)
-      sendgrid-ruby (~> 6.4)
     sendgrid-ruby (6.6.2)
       ruby_http_client (~> 3.4)
+    settingslogic (2.0.9)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -324,8 +322,8 @@ DEPENDENCIES
   rubocop-rails
   sass-rails (~> 5.0)
   selenium-webdriver
-  sendgrid-actionmailer
   sendgrid-ruby
+  settingslogic
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets-rails

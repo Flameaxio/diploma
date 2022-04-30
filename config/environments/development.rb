@@ -8,6 +8,16 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  config.action_mailer.smtp_settings = {
+    user_name: 'apikey',
+    password: Settings.sendgrid_api_key,
+    domain: 'flameaxe.me',
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
+
   # Do not eager load code on boot.
   config.eager_load = false
 

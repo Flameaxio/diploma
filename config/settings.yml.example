@@ -1,0 +1,11 @@
+defaults: &defaults
+  sendgrid_api_key: <%= ENV['SENDGRID_API_KEY'] %>
+
+production:
+  <<: *defaults
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults

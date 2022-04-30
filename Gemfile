@@ -39,7 +39,6 @@ gem 'fast_jsonapi'
 gem 'devise'
 
 # Sendgrid integration for emails
-gem 'sendgrid-actionmailer'
 gem 'sendgrid-ruby'
 
 group :development, :test do
@@ -86,3 +85,6 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'bootstrap', '~> 5.1.3'
 gem 'jquery-rails'
 gem 'sprockets-rails'
+
+# Dynamic settings
+gem 'settingslogic'

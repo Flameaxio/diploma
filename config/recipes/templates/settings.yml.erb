@@ -1,0 +1,11 @@
+defaults: &defaults
+  sendgrid_api_key: <%= fetch(:sendgrid_api_key) %>
+
+production:
+  <<: *defaults
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
