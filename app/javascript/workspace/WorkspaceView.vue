@@ -10,10 +10,21 @@
 				/>
 			</div>
 			<template v-if="isOpen">
-				<div class="backdrop" @click="close"></div>
 				<div class="card-view">
-					<div class="top"><v-icon class="icon" @click="close"> mdi-close </v-icon></div>
-					<card-details-view :card="selectedTicket" :columns="workspace.columns" />
+					<v-dialog v-model="isOpen">
+						<v-card>
+							<v-card-title>
+								<div class="top">
+									<v-icon class="icon" @click="close"> mdi-close </v-icon>
+								</div>
+								<v-divider></v-divider>
+							</v-card-title>
+
+							<v-card-text>
+								<card-details-view :card="selectedTicket" :columns="workspace.columns" />
+							</v-card-text>
+						</v-card>
+					</v-dialog>
 				</div>
 			</template>
 		</v-container>
@@ -38,9 +49,10 @@ export default {
 		...mapState(['workspace'])
 	},
 	methods: {
-		...mapActions(['loadWorkspace']),
+		...mapActions(['loadWorkspace', 'loadUsers']),
 		async loadData() {
 			await this.loadWorkspace()
+			await this.loadUsers()
 		},
 		open(target) {
 			this.selectedTicket = target
@@ -77,23 +89,11 @@ export default {
 	cursor: pointer;
 }
 
-.card-view {
-	position: absolute;
-	top: 1vh;
-	left: 1vw;
-	width: 98vw;
-	height: 98vh;
-	background: white;
-	border: 1px solid black;
-	border-radius: 5px;
-}
-
 .top {
 	width: 100%;
 	height: 32px;
 	display: flex;
 	flex-direction: row-reverse;
-	border-bottom: 1px solid #333333;
 	.icon {
 		height: 32px;
 		width: 32px;

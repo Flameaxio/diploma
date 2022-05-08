@@ -1,7 +1,10 @@
 <template>
 	<div class="column-container">
 		<div class="header">
-			<span class="name"> {{ column.name }} </span><br />
+			<div class="top">
+				<span class="name"> {{ column.name }} </span><br />
+				<edit-column :column="column" />
+			</div>
 			<span class="ticket-number">
 				<v-icon> mdi-note-alert-outline </v-icon>
 				{{ ticketCount }}
@@ -20,11 +23,11 @@
 <script>
 import { Drag, Drop } from 'vue-easy-dnd'
 import TicketView from './TicketView'
+import EditColumn from './EditColumn'
 import { mapActions } from 'vuex'
-import CardDetailsView from '../shared/CardDetailsView.vue'
 
 export default {
-	components: { TicketView, Drag, Drop },
+	components: { TicketView, Drag, Drop, EditColumn },
 	props: {
 		column: { type: Object, required: true }
 	},
@@ -62,8 +65,15 @@ export default {
 	border-bottom: 1px solid #b4b9b9;
 }
 
-.name {
+.top {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.name {
 	font-weight: 600;
 	font-size: 14px;
 }

@@ -30,6 +30,7 @@ specifiers:
   vue-scrollto: ^2.20.0
   vue-template-compiler: ^2.6.14
   vue-trix: ^1.2.0
+  vue2-jsoneditor: ^1.0.6
   vuetify: ^2.6.2
   vuex: ^3.6.2
   webpack: ^4.46.0
@@ -59,6 +60,7 @@ dependencies:
   vue-scrollto: 2.20.0
   vue-template-compiler: 2.6.14
   vue-trix: 1.2.0
+  vue2-jsoneditor: 1.0.6
   vuetify: 2.6.2_vue@2.6.14
   vuex: 3.6.2_vue@2.6.14
   webpack: 4.46.0_webpack-cli@3.3.12
@@ -1555,6 +1557,13 @@ packages:
     dependencies:
       ajv: 6.12.6
 
+  /ajv/3.8.8:
+    resolution: {integrity: sha1-xOcOwMWQRCYlKRtRr3/GpG34Uqg=}
+    dependencies:
+      co: 4.6.0
+      json-stable-stringify: 1.0.1
+    dev: false
+
   /ajv/6.12.6:
     resolution: {integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==}
     dependencies:
@@ -1930,6 +1939,12 @@ packages:
       balanced-match: 1.0.2
       concat-map: 0.0.1
 
+  /brace/0.8.0:
+    resolution: {integrity: sha1-6CbG1QVMrl9getexyBI23SzwGXg=}
+    dependencies:
+      w3c-blob: 0.0.1
+    dev: false
+
   /braces/2.3.2:
     resolution: {integrity: sha512-aNdbnj9P8PjdXU4ybaWLK2IF3jc/EoDYbC7AazW6to3TRsfXxscC9UXOB5iDiEQrkyIbWp2SLQda4+QAa7nc3w==}
     engines: {node: '>=0.10.0'}
@@ -2279,6 +2294,11 @@ packages:
       string-width: 3.1.0
       strip-ansi: 5.2.0
       wrap-ansi: 5.1.0
+
+  /co/4.6.0:
+    resolution: {integrity: sha1-bqa989hTrlTMuOR7+gvz+QMfsYQ=}
+    engines: {iojs: '>= 1.0.0', node: '>= 0.12.0'}
+    dev: false
 
   /coa/2.0.2:
     resolution: {integrity: sha512-q5/jG+YQnSy4nRTV4F7lPepBJZ8qBNJJDBuJdoejDyLXgmL7IEo+Le2JDZudFTFt7mrCqIRaSjws4ygRCTCAXA==}
@@ -4412,6 +4432,10 @@ packages:
     resolution: {integrity: sha1-TkMekrEalzFjaqH5yNHMvP2reN8=}
     engines: {node: '>=0.10.0'}
 
+  /javascript-natural-sort/0.7.1:
+    resolution: {integrity: sha1-+eIwPUUH9tdDVac2ZNFED7Wg71k=}
+    dev: false
+
   /jest-worker/26.6.2:
     resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
     engines: {node: '>= 10.13.0'}
@@ -4466,6 +4490,12 @@ packages:
     resolution: {integrity: sha1-nbe1lJatPzz+8wp1FC0tkwrXJlE=}
     dev: true
 
+  /json-stable-stringify/1.0.1:
+    resolution: {integrity: sha1-mnWdOcXy/1A/1TAGRu1EX4jE+a8=}
+    dependencies:
+      jsonify: 0.0.0
+    dev: false
+
   /json3/3.3.3:
     resolution: {integrity: sha512-c7/8mbUsKigAbLkD5B010BK4D9LZm7A1pNItkEwiUZRpIN66exu/e7YQWysGun+TRKaJp8MhemM+VkfWv42aCA==}
     dev: true
@@ -4483,6 +4513,18 @@ packages:
     hasBin: true
     dependencies:
       minimist: 1.2.5
+    dev: false
+
+  /jsoneditor/5.5.11:
+    resolution: {integrity: sha1-HgbU8J5CGJ7mOJHiQ10JGpvQAXo=}
+    dependencies:
+      ajv: 3.8.8
+      brace: 0.8.0
+      javascript-natural-sort: 0.7.1
+    dev: false
+
+  /jsonify/0.0.0:
+    resolution: {integrity: sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=}
     dev: false
 
   /killable/1.0.1:
@@ -7652,6 +7694,15 @@ packages:
     resolution: {integrity: sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==}
     dev: false
 
+  /vue2-jsoneditor/1.0.6:
+    resolution: {integrity: sha512-TPxmDdCRDB5b+RNTSQLQUqzIg8lRkOGgbXaeLdqR88uP+TeagBk4gEQOvk040Xz8fYTFVkIJbHAvc33rpXKYCw==}
+    engines: {node: '>= 4.0.0', npm: '>= 3.0.0'}
+    dependencies:
+      jsoneditor: 5.5.11
+      lodash: 4.17.21
+      vue: 2.6.14
+    dev: false
+
   /vuetify/2.6.2_vue@2.6.14:
     resolution: {integrity: sha512-nx3uZkO8MZNMshUEh1xKaQ1hQYepNwWFn3FVxKt+XBVf7ZFscd0GS/a3KZo4B3baXQmziCQAZKNIQF5IWeaIUw==}
     peerDependencies:
@@ -7666,6 +7717,10 @@ packages:
       vue: ^2.0.0
     dependencies:
       vue: 2.6.14
+    dev: false
+
+  /w3c-blob/0.0.1:
+    resolution: {integrity: sha1-sM01KhpQ9RVWNCD/1YYflQ8dhbg=}
     dev: false
 
   /watchpack-chokidar2/2.0.1:

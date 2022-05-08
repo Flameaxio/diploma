@@ -3,7 +3,8 @@
 class Card < ApplicationRecord
   belongs_to :workspace
   belongs_to :column
-  has_many :card_logs
+  has_many :card_logs, dependent: :destroy
+  belongs_to :assignee, class_name: 'User', optional: true
 
   before_create :assign_scoped_id
 

@@ -4,6 +4,7 @@
 			<span class="title">{{ ticket.title }}</span>
 			<div class="footer">
 				<span class="scoped-id">#{{ ticket.scopedId }}</span>
+				<span class="assignee">{{ ticket.assignee }}</span>
 			</div>
 		</div>
 	</div>
@@ -31,6 +32,20 @@ export default {
 	cursor: pointer;
 }
 .footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 	margin-top: 5px;
+}
+.scoped-id {
+	width: 100%;
+}
+
+.assignee {
+	display: flex;
+	align-items: center;
+	width: 70%;
+	font-size: 12px;
+	text-overflow: ellipsis;
 }
 </style>

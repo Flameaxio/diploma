@@ -88,3 +88,9 @@ gem 'sprockets-rails'
 
 # Dynamic settings
 gem 'settingslogic'
+
+# String interpolation
+gem 'mustache', '~> 1.0'
+
+# HTTP requests
+gem 'httparty'

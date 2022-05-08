@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_10_110813) do
+ActiveRecord::Schema.define(version: 2022_05_08_115915) do
 
   create_table "card_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "action_type", null: false
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 2022_04_10_110813) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "column_id", null: false
+    t.integer "assignee_id"
+    t.index ["assignee_id"], name: "index_cards_on_assignee_id"
     t.index ["column_id"], name: "index_cards_on_column_id"
     t.index ["workspace_id"], name: "index_cards_on_workspace_id"
   end
@@ -61,6 +63,14 @@ ActiveRecord::Schema.define(version: 2022_04_10_110813) do
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "webhooks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.text "body", null: false
+    t.string "url", null: false
+    t.integer "column_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "workspaces", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|

@@ -11,9 +11,22 @@
 				<div class="list-body">
 					<v-autocomplete
 						v-model="selectedStatus"
-						rounded
-						:items="columnSelectItems"
 						dense
+						:items="statusItems"
+						height="30"
+						class="autocomplete"
+					></v-autocomplete>
+				</div>
+			</div>
+			<div class="list-item">
+				<div class="list-title">Assignee</div>
+				<div class="list-body">
+					<v-autocomplete
+						v-model="selectedAssignee"
+						dense
+						:items="userItems"
+						height="30"
+						class="autocomplete"
 					></v-autocomplete>
 				</div>
 			</div>
@@ -38,7 +51,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import MessageView from './MessageView'
 import VueTrix from 'vue-trix'
 
@@ -53,19 +66,21 @@ export default {
 			cardInfo: {},
 			loading: true,
 			selectedStatus: '',
+			selectedAssignee: '',
 			messageContent: ''
 		}
 	},
 	async created() {
-		this.cardInfo = await this.loadTicket(this.card.id)
-		this.selectedStatus = this.cardInfo.status
+		await this.loadData()
+		this.selectedStatus = this.cardInfo.status.id
+		this.selectedAssignee = this.cardInfo.assignee?.id || ''
 		this.loading = false
 	},
 	mounted() {
 		setTimeout(this.scrollToElement, 50)
 	},
 	methods: {
-		...mapActions(['loadTicket', 'postMessage']),
+		...mapActions(['loadTicket', 'postMessage', 'moveTicket', 'changeAssignee']),
 		formattedDateTime(dateString) {
 			return new Date(dateString).toLocaleString('sv-SE') // e.g. 2022-02-13 13:17:43
 		},
@@ -77,41 +92,45 @@ export default {
 		},
 		scrollToElement() {
 			const container = this.$refs.container
+			if (!container) return
 
 			container.scrollTop = container.scrollHeight
+		},
+		async loadData() {
+			this.cardInfo = await this.loadTicket(this.card.id)
+			setTimeout(this.scrollToElement, 50)
 		}
 	},
 	computed: {
-		columnSelectItems() {
+		...mapState(['availableUsers']),
+		statusItems() {
 			return this.columns.map((c) => ({
-				value: c.name,
+				value: c.id,
 				text: c.name
 			}))
+		},
+		userItems() {
+			return this.availableUsers.map((u) => ({ value: u.id, text: u.fullName }))
+		}
+	},
+	watch: {
+		async selectedStatus(newStatus, oldStatus) {
+			if (newStatus !== oldStatus && oldStatus > 0) {
+				await this.moveTicket({ id: this.card.id, toId: newStatus })
+				await this.loadData()
+			}
+		},
+		async selectedAssignee(newAssignee, oldAssignee) {
+			if (newAssignee !== oldAssignee && oldAssignee > 0) {
+				await this.changeAssignee({ id: this.card.id, assigneeId: newAssignee })
+				await this.loadData()
+			}
 		}
 	}
 }
 </script>
 
-<style lang="scss">
-.v-select__slot {
-	display: flex;
-	flex-direction: row;
-	height: 20px;
-}
-.v-autocomplete__content {
-	position: absolute;
-}
-
-.v-select-list {
-	background: white;
-	border: 1px solid black;
-	border-radius: 3px;
-}
-
-.v-list-item__title {
-	cursor: pointer;
-}
-</style>
+<style lang="scss"></style>
 
 <style lang="scss" scoped>
 .main {
@@ -152,6 +171,7 @@ export default {
 		border-top: 1px solid black;
 		padding-top: 20px;
 		overflow-y: scroll;
+		max-height: 800px;
 		& > * {
 			margin-top: 15px;
 		}
@@ -186,5 +206,9 @@ export default {
 		display: flex;
 		flex-direction: row;
 	}
+}
+
+.v-input {
+	margin-top: 16px !important;
 }
 </style>
