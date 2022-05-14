@@ -8,6 +8,14 @@
 					:column="column"
 					@open="open"
 				/>
+				<div class="create-column">
+					<edit-column
+						:column="{ id: null, name: '' }"
+						icon="mdi-plus-circle"
+						:icon-size="96"
+						@manipulate-column="createColumn"
+					></edit-column>
+				</div>
 			</div>
 			<template v-if="isOpen">
 				<div class="card-view">
@@ -35,10 +43,11 @@
 import { mapActions, mapState } from 'vuex'
 import ColumnView from './ColumnView'
 import CardDetailsView from '../shared/CardDetailsView'
+import EditColumn from './EditColumn'
 
 export default {
 	name: 'WorkspacesView',
-	components: { ColumnView, CardDetailsView },
+	components: { ColumnView, CardDetailsView, EditColumn },
 	data() {
 		return {
 			isOpen: false,
@@ -49,7 +58,7 @@ export default {
 		...mapState(['workspace'])
 	},
 	methods: {
-		...mapActions(['loadWorkspace', 'loadUsers']),
+		...mapActions(['loadWorkspace', 'loadUsers', 'createColumn']),
 		async loadData() {
 			await this.loadWorkspace()
 			await this.loadUsers()
@@ -69,10 +78,20 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.v-application--wrap {
+	min-height: calc(100vh - 48px) !important;
+	max-width: 100vw;
+}
+.container {
+	max-height: calc(100vh - 48px) !important;
+}
+</style>
+
 <style lang="scss" scoped>
 .columns {
 	width: 100%;
-	height: 100vh;
+	height: calc(100vh - 60px);
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -84,7 +103,7 @@ export default {
 	top: 0;
 	left: 0;
 	width: 100vw;
-	height: 100vh;
+	height: calc(100vh - 48px);
 	background: #666666;
 	cursor: pointer;
 }
@@ -105,5 +124,16 @@ export default {
 		border: none;
 		cursor: pointer;
 	}
+}
+
+.create-column {
+	width: 180px;
+	padding: 5px 5px;
+	margin-left: 10px;
+	background-color: #efefef;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 </style>

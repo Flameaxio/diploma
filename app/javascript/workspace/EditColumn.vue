@@ -2,11 +2,17 @@
 	<div class="text-center">
 		<v-dialog v-model="dialog" class="dialog">
 			<template v-slot:activator="{ on, attrs }">
-				<div class="openButton" v-bind="attrs" v-on="on"><v-icon> mdi-cog </v-icon></div>
+				<div class="openButton" v-bind="attrs" v-on="on">
+					<v-icon :style="iconSize ? `font-size: ${iconSize}px` : ''">
+						{{ icon }}
+					</v-icon>
+				</div>
 			</template>
 
 			<v-card>
-				<v-card-title class="text-h5 grey lighten-2"> Edit webhook </v-card-title>
+				<v-card-title class="text-h5 grey lighten-2 flex-row justify-space-between">
+					<span>Edit Column</span><v-icon @click="close">mdi-close</v-icon>
+				</v-card-title>
 
 				<v-card-text style="overflow-y: scroll">
 					<div class="input"><v-text-field label="Name" v-model="name" /></div>
@@ -49,7 +55,10 @@
 
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn color="primary" text @click="closeAndSave"> Save </v-btn>
+					<v-btn v-if="column.id" color="error" @click="deleteColumn({ id: column.id })"
+						>Delete</v-btn
+					>
+					<v-btn color="primary" @click="closeAndSave"> Save </v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
@@ -62,7 +71,12 @@ import { mapActions } from 'vuex'
 
 export default {
 	components: { JSONEditor },
-	props: { column: { type: Object, required: true } },
+	props: {
+		column: { type: Object, required: true },
+		icon: { type: String, default: 'mdi-cog' },
+		iconSize: { type: Number, required: false }
+	},
+	emits: ['manipulate-column'],
 	data() {
 		return {
 			dialog: false,
@@ -74,7 +88,7 @@ export default {
 		}
 	},
 	methods: {
-		...mapActions(['updateColumn']),
+		...mapActions(['deleteColumn']),
 		close() {
 			this.dialog = false
 		},
@@ -90,7 +104,7 @@ export default {
 				params.url = this.url
 				params.body = JSON.stringify(this.newBody)
 			}
-			await this.updateColumn(params)
+			await this.$emit('manipulate-column', params)
 			this.close()
 		}
 	}

@@ -7,6 +7,13 @@
 					:key="workspace.id"
 					:workspace="workspace"
 				/>
+				<div class="workspace-card" @click="isCreating = true">
+					<v-icon x-large v-if="!isCreating">mdi-plus-circle</v-icon>
+					<div v-else class="creation">
+						<v-text-field dense v-model="name" />
+						<v-btn color="primary" x-small @click="save">Save</v-btn>
+					</div>
+				</div>
 			</div>
 		</v-container>
 	</v-app>
@@ -21,15 +28,24 @@ export default {
 	components: { WorkspaceView },
 	data() {
 		return {
+			isCreating: false,
+			name: ''
 		}
 	},
 	computed: {
 		...mapState(['workspaces'])
 	},
 	methods: {
-		...mapActions(['loadWorkspaces']),
+		...mapActions(['loadWorkspaces', 'createWorkspace']),
 		async loadData() {
 			await this.loadWorkspaces()
+		},
+		async save() {
+			if (!this.name) return
+
+			await this.createWorkspace({ name: this.name })
+			this.isCreating = false
+			this.name = ''
 		}
 	},
 	mounted() {
@@ -42,5 +58,29 @@ export default {
 .workspaces-wrapper {
 	display: flex;
 	flex-wrap: wrap;
+}
+
+.workspace-card {
+	width: 200px;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid black;
+	border-radius: 10px;
+	text-decoration: none;
+	color: black;
+	margin-left: 10px;
+	cursor: pointer;
+	box-sizing: border-box;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.creation {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 </style>

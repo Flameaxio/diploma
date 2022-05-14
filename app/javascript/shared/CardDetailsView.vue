@@ -33,7 +33,7 @@
 		</div>
 		<div class="details-group">
 			<div class="title">{{ cardInfo.title }}</div>
-			<div class="body">{{ cardInfo.body }}</div>
+			<div class="body" v-html="cardInfo.body" />
 			<div class="history" ref="container">
 				<div class="messages" :key="cardLog.id" v-for="cardLog in cardInfo.cardLogs">
 					<MessageView :card-log="cardLog" />
@@ -53,7 +53,6 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import MessageView from './MessageView'
-import VueTrix from 'vue-trix'
 
 export default {
 	components: { MessageView, VueTrix },

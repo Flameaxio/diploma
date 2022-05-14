@@ -19,6 +19,7 @@
     "sass-loader": "10",
     "style-loader": "2",
     "vue": "^2.6.14",
+    "vue-click-outside-element": "^1.0.15",
     "vue-easy-dnd": "^1.22.0",
     "vue-loader": "^15.9.8",
     "vue-scrollto": "^2.20.0",

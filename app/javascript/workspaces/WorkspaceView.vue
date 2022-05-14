@@ -24,5 +24,6 @@ export default {
 	border-radius: 10px;
 	text-decoration: none;
 	color: black;
+	margin-left: 10px;
 }
 </style>

@@ -1,17 +1,21 @@
 import Vue from 'vue'
-import WorkspacesView from '../workspaces/WorkspacesView.vue'
+import HeaderView from '../header/HeaderView.vue'
 import Vuetify from 'vuetify'
+import store from '../header/store'
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
-import store from '../workspaces/store'
+import VueTrix from 'vue-trix'
+
+window.VueTrix = VueTrix
 
 Vue.use(Vuetify)
-Vue.component('workspacesView', WorkspacesView)
+Vue.use(VueTrix)
+Vue.component('headerView', HeaderView)
 
 document.addEventListener('DOMContentLoaded', () => {
 	new Vue({
-		el: '[data-behavior=workspaces]',
+		el: '[data-behavior=header]',
 		vuetify: new Vuetify({ icons: { iconfont: 'mdi' } }),
 		store
 	})

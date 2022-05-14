@@ -13,7 +13,12 @@
       <%= value %>
     </div>
   <% end %>
+  <div data-behavior="header">
+    <header-view :current-user="<%= @current_user_json %>" :current-workspace="<%= @current_workspace_json || '{}' %>" :available-users="<%= @available_users_json || '{}' %>"></header-view>
+  </div>
     <div class="main-container">
+      <%= javascript_pack_tag 'header.js' %>
+      <%= stylesheet_pack_tag 'header', id: "main-stylesheet", media: "all" %>
       <%= yield %>
     </div>
   </body>

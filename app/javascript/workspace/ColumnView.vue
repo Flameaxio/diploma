@@ -3,7 +3,7 @@
 		<div class="header">
 			<div class="top">
 				<span class="name"> {{ column.name }} </span><br />
-				<edit-column :column="column" />
+				<edit-column :column="column" @manipulate-column="updateColumn" />
 			</div>
 			<span class="ticket-number">
 				<v-icon> mdi-note-alert-outline </v-icon>
@@ -37,7 +37,7 @@ export default {
 		}
 	},
 	methods: {
-		...mapActions(['moveTicket']),
+		...mapActions(['moveTicket', 'updateColumn']),
 		insert(el) {
 			const id = el.data.id
 			const toId = el.top.$el.classList[el.top.$el.classList.length - 1].slice(-1)

@@ -11,6 +11,7 @@ Vue.use(VueScrollTo, {
 	container: '.history'
 })
 Vue.use(Vuetify)
+Vue.use(VueTrix)
 Vue.component('workspaceView', WorkspaceView)
 
 document.addEventListener('DOMContentLoaded', () => {

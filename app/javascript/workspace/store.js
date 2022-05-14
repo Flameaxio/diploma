@@ -52,6 +52,16 @@ export default new Vuex.Store({
 			const requestUrl = `/workspaces/${state.workspace.id}/columns/${id}`
 			const { data: resp } = await axios.put(requestUrl, { name, url, body })
 			commit('updateColumn', { id, column: resp.data.attributes })
+		},
+		async createColumn({ state, commit }, { name, url, body }) {
+			const requestUrl = `/workspaces/${state.workspace.id}/columns`
+			const { data: resp } = await axios.post(requestUrl, { name, url, body })
+			commit('addColumn', resp.data.attributes)
+		},
+		async deleteColumn({ state, commit }, { id }) {
+			const requestUrl = `/workspaces/${state.workspace.id}/columns/${id}`
+			await axios.delete(requestUrl)
+			commit('deleteColumn', id)
 		}
 	},
 	mutations: {
@@ -65,6 +75,14 @@ export default new Vuex.Store({
 			const newColumns = [...state.workspace.columns]
 			newColumns[newColumns.findIndex((c) => c.id === id)] = column
 			state.workspace.columns = newColumns
+		},
+		addColumn(state, column) {
+			state.workspace.columns = [...state.workspace.columns, column]
+		},
+		deleteColumn(state, columnId) {
+			state.workspace.columns = state.workspace.columns.filter(
+				({ id }) => columnId !== id
+			)
 		}
 	}
 })

@@ -2,15 +2,15 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'homepage#show'
+  root to: 'workspaces#index'
 
-  resources :workspaces do
+  resources :workspaces, only: %i[index show create] do
     post :move_card, on: :member
     post :change_assignee, on: :member
-    resources :cards, only: %i[show] do
+    resources :cards, only: %i[show create] do
       post :post_message
     end
-    resources :columns, only: %i[update]
+    resources :columns, only: %i[update create destroy]
     resources :users, only: %i[index]
   end
 end

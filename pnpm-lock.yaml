@@ -25,6 +25,7 @@ specifiers:
   sass-loader: '10'
   style-loader: '2'
   vue: ^2.6.14
+  vue-click-outside-element: ^1.0.15
   vue-easy-dnd: ^1.22.0
   vue-loader: ^15.9.8
   vue-scrollto: ^2.20.0
@@ -55,6 +56,7 @@ dependencies:
   sass-loader: 10.1.1_webpack@4.46.0
   style-loader: 2.0.0_webpack@4.46.0
   vue: 2.6.14
+  vue-click-outside-element: 1.0.15
   vue-easy-dnd: 1.22.0
   vue-loader: 15.9.8_cd7d3296ac462ab2aecfca1edf15e195
   vue-scrollto: 2.20.0
@@ -7595,6 +7597,10 @@ packages:
       vue: ^2.0.0
     dependencies:
       vue: 2.6.14
+    dev: false
+
+  /vue-click-outside-element/1.0.15:
+    resolution: {integrity: sha512-6d7eUazOiHnrNorLSIPxOYcoJYaSFlc9OSnUtuZWDG3l5EIomQam0EBfJdHMA50zjBraV5WRl07fh26ger/z4A==}
     dev: false
 
   /vue-easy-dnd/1.22.0:

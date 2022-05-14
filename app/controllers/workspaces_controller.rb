@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class WorkspacesController < ApplicationController
-  before_action :load_workspace, except: %i[index]
+  before_action :load_workspace, except: %i[index create]
   before_action :load_card, only: %i[move_card change_assignee]
 
   def index
@@ -13,9 +13,18 @@ class WorkspacesController < ApplicationController
     end
   end
 
+  def create
+    render json: Workspace.create(name: params[:name])
+  end
+
   def show
     respond_to do |r|
-      r.html
+      r.html do
+        @current_workspace_json = WorkspaceSerializer.new(@workspace).serializable_hash[:data][:attributes].to_json
+        @available_users_json = UserBriefSerializer.new(User.all).serializable_hash[:data].map do |u|
+          u[:attributes]
+        end.to_json
+      end
       r.json do
         render json: WorkspaceSerializer.new(@workspace).serializable_hash
       end
