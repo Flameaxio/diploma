@@ -6,8 +6,9 @@ class ColumnsController < ApplicationController
   def update
     if @column.update(column_params)
       if webhook_params.compact.present?
-        webhook = Webhook.find_or_create_by(column: @column)
-        webhook.update(webhook_params)
+        webhook = Webhook.find_or_initialize_by(column: @column)
+        webhook.assign_attributes(webhook_params)
+        webhook.save
       end
       render json: ColumnSerializer.new(@column.reload).serializable_hash
     end
