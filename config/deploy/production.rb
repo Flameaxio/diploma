@@ -12,6 +12,8 @@ server 'flameaxe.me:25565', user: 'deploy', roles: %w{app db web}
 set :branch, 'master'
 set_default :sendgrid_api_key, ENV['SENDGRID_API_KEY']
 
+raise 'SENDGRID API KEY IS NOT PROVIDED' if ENV['SENDGRID_API_KEY'].nil?
+
 append :linked_dirs, 'tmp/pids', 'tmp/sockets', 'public/uploads'
 append :linked_files, 'config/database.yml'
 
