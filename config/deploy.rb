@@ -3,7 +3,7 @@
 # config valid for current version and patch releases of Capistrano
 lock '~> 3.17.0'
 
-set :rvm_ruby_version, '2.5.1'
+set :rvm_ruby_version, '2.5.1@diploma'
 
 set :application, 'diploma'
 set :repo_url, 'git@github.com:Flameaxio/diploma.git'
