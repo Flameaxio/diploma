@@ -106,5 +106,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Action Mailer setup for devise
-  config.action_mailer.default_url_options = { host: 'flameaxe.me', port: 443 }
+  config.action_mailer.default_url_options = { host: 'flameaxe.me', protocol: 'https' }
 end
