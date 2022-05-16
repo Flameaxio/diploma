@@ -103,6 +103,9 @@ export default {
 			if (this.enabled) {
 				params.url = this.url
 				params.body = JSON.stringify(this.newBody)
+			} else {
+				params.url = ''
+				params.body = '{}'
 			}
 			await this.$emit('manipulate-column', params)
 			this.close()
