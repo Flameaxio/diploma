@@ -40,7 +40,7 @@ export default {
 		...mapActions(['moveTicket', 'updateColumn']),
 		insert(el) {
 			const id = el.data.id
-			const toId = el.top.$el.classList[el.top.$el.classList.length - 1].slice(-1)
+			const toId = el.top.$el.classList[el.top.$el.classList.length - 1].match(/\d+/g)[0]
 			this.moveTicket({ id: id, toId: toId })
 		}
 	}

@@ -40,7 +40,7 @@ class WorkspacesController < ApplicationController
                              performed_by: current_user)
       render json: WorkspaceSerializer.new(@workspace).serializable_hash
     else
-      render head(:unprocessable_entity)
+      head(:unprocessable_entity)
     end
   end
 
@@ -54,7 +54,7 @@ class WorkspacesController < ApplicationController
                              performed_by: current_user)
       render json: WorkspaceSerializer.new(@workspace).serializable_hash
     else
-      render head(:unprocessable_entity)
+      head(:unprocessable_entity)
     end
   end
 
