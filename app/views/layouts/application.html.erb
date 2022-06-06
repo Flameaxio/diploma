@@ -14,10 +14,10 @@
     </div>
   <% end %>
   <% if @current_user_json %>
-  <div data-behavior="header">
-    <header-view :current-user="<%= @current_user_json %>" :current-workspace="<%= @current_workspace_json || '{}' %>" :available-users="<%= @available_users_json || '{}' %>"></header-view>
     <%= javascript_pack_tag 'header.js' %>
     <%= stylesheet_pack_tag 'header', id: "main-stylesheet", media: "all" %>
+  <div data-behavior="header">
+    <header-view :current-user="<%= @current_user_json %>" :current-workspace="<%= @current_workspace_json || '[]' %>" :available-users="<%= @available_users_json || '[]' %>"></header-view>
   </div>
   <% end %>
     <div class="main-container">
