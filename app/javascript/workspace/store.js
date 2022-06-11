@@ -6,7 +6,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 	state: {
 		workspace: {},
-		availableUsers: []
+		availableUsers: [],
+		cards: {},
+		cardsPagy: { page: 1, items: 15 },
+		moreToLoad: true
 	},
 	actions: {
 		async loadWorkspace({ commit }) {
@@ -22,13 +25,13 @@ export default new Vuex.Store({
 				resp.data.map((u) => u.attributes)
 			)
 		},
-		async moveTicket({ state, commit }, { id, toId }) {
+		async moveTicket({ state, commit }, { id, fromId, toId }) {
 			const url = `/workspaces/${state.workspace.id}/move_card`
-			const resp = await axios.post(url, {
+			await axios.post(url, {
 				card_id: id,
 				to_id: toId
 			})
-			commit('setWorkspace', resp.data.data.attributes)
+			commit('moveTicket', { id, fromColumnId: fromId, toColumnId: toId })
 		},
 		async loadTicket({ state, commit }, id) {
 			const url = `/workspaces/${state.workspace.id}/cards/${id}.json`
@@ -62,6 +65,25 @@ export default new Vuex.Store({
 			const requestUrl = `/workspaces/${state.workspace.id}/columns/${id}`
 			await axios.delete(requestUrl)
 			commit('deleteColumn', id)
+		},
+		async loadCards({ state, commit }, { page }) {
+			if (!state.workspace.id) return false
+
+			const url = `/workspaces/${state.workspace.id}/cards.json`
+			const { data: resp } = await axios.get(url, {
+				params: { per_page: state.cardsPagy.items, page: page }
+			})
+			const transformedCards = Object.keys(resp.cards).reduce(
+				(previousValue, currentValue) => {
+					return Object.assign(previousValue, {
+						[currentValue]: resp.cards[currentValue]
+					})
+				},
+				{}
+			)
+			commit('setCards', transformedCards)
+			commit('setCardsPagy', resp.pagy)
+			commit('setMoreToLoad', transformedCards)
 		}
 	},
 	mutations: {
@@ -83,6 +105,37 @@ export default new Vuex.Store({
 			state.workspace.columns = state.workspace.columns.filter(
 				({ id }) => columnId !== id
 			)
+		},
+		setCards(state, newCards) {
+			state.cards = Object.keys(newCards).reduce((obj, columnId) => {
+				return {
+					...obj,
+					[columnId]: {
+						items: (state.cards[columnId]?.items ?? [])
+							.concat(newCards[columnId].items)
+							.filter(Boolean),
+						pagy: newCards[columnId].pagy
+					}
+				}
+			}, {})
+		},
+		setCardsPagy(state, cardsPagy) {
+			state.cardsPagy = cardsPagy
+		},
+		moveTicket({ cards }, { id, fromColumnId, toColumnId }) {
+			const card = cards[fromColumnId]?.items.find((i) => i.id === id)
+			if (!card) return
+
+			cards[fromColumnId].items = cards[fromColumnId].items.filter((i) => i.id !== id)
+			cards[toColumnId]?.items.push({ ...card, columnId: toColumnId })
+			cards[toColumnId].pagy = {
+				...cards[toColumnId].pagy,
+				count: cards[toColumnId].pagy.count + 1
+			}
+		},
+		setMoreToLoad(state, transformedCards) {
+			state.moreToLoad = !!Object.values(transformedCards).filter((c) => c.items.length)
+				.length
 		}
 	}
 })

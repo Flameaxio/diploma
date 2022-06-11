@@ -115,7 +115,7 @@ export default {
 	watch: {
 		async selectedStatus(newStatus, oldStatus) {
 			if (newStatus !== oldStatus && oldStatus > 0) {
-				await this.moveTicket({ id: this.card.id, toId: newStatus })
+				await this.moveTicket({ id: this.card.id, fromId: oldStatus, toId: newStatus })
 				await this.loadData()
 			}
 		},

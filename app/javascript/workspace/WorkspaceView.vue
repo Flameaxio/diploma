@@ -1,21 +1,29 @@
 <template>
 	<v-app>
 		<v-container>
-			<div class="columns">
-				<column-view
-					v-bind:key="column.id"
-					v-for="column in workspace.columns"
-					:column="column"
-					@open="open"
-				/>
-				<div class="create-column">
-					<edit-column
-						:column="{ id: null, name: '' }"
-						icon="mdi-plus-circle"
-						:icon-size="96"
-						@manipulate-column="createColumn"
-					></edit-column>
+			<div class="columns" infinite-wrapper>
+				<div class="column-wrapper">
+					<column-view
+						v-bind:key="column.id"
+						v-for="column in workspace.columns"
+						:column="column"
+						@open="open"
+					/>
+					<div class="create-column">
+						<edit-column
+							:column="{ id: null, name: '' }"
+							icon="mdi-plus-circle"
+							:icon-size="96"
+							@manipulate-column="createColumn"
+						></edit-column>
+					</div>
 				</div>
+				<infinite-loading
+					force-use-infinite-wrapper
+					@infinite="infiniteHandler"
+					v-if="workspace.id"
+					:distance="1"
+				></infinite-loading>
 			</div>
 			<template v-if="isOpen">
 				<div class="card-view">
@@ -44,10 +52,11 @@ import { mapActions, mapState } from 'vuex'
 import ColumnView from './ColumnView'
 import CardDetailsView from '../shared/CardDetailsView'
 import EditColumn from './EditColumn'
+import InfiniteLoading from 'vue-infinite-loading'
 
 export default {
 	name: 'WorkspacesView',
-	components: { ColumnView, CardDetailsView, EditColumn },
+	components: { ColumnView, CardDetailsView, EditColumn, InfiniteLoading },
 	data() {
 		return {
 			isOpen: false,
@@ -55,13 +64,14 @@ export default {
 		}
 	},
 	computed: {
-		...mapState(['workspace'])
+		...mapState(['workspace', 'cardsPagy', 'cards', 'moreToLoad'])
 	},
 	methods: {
-		...mapActions(['loadWorkspace', 'loadUsers', 'createColumn']),
+		...mapActions(['loadWorkspace', 'loadUsers', 'createColumn', 'loadCards']),
 		async loadData() {
 			await this.loadWorkspace()
 			await this.loadUsers()
+			await this.loadCards({ page: 1 })
 		},
 		open(target) {
 			this.selectedTicket = target
@@ -70,6 +80,14 @@ export default {
 		close() {
 			this.isOpen = false
 			this.selectedTicket = null
+		},
+		async infiniteHandler($state) {
+			await this.loadCards({ page: this.cardsPagy.page + 1 })
+			console.log(this.moreToLoad)
+			if (this.moreToLoad) {
+				return $state.loaded()
+			}
+			$state.complete()
 		}
 	},
 	mounted() {
@@ -93,9 +111,15 @@ export default {
 	width: 100%;
 	height: calc(100vh - 60px);
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	flex-wrap: nowrap;
 	overflow-x: scroll;
+	overflow-y: scroll;
+}
+
+.column-wrapper {
+	display: flex;
+	flex-direction: row;
 }
 
 .backdrop {
@@ -134,6 +158,8 @@ export default {
 	height: 100%;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: start;
+	box-sizing: border-box;
+	padding-top: 30vh;
 }
 </style>

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :workspaces, only: %i[index show create] do
     post :move_card, on: :member
     post :change_assignee, on: :member
-    resources :cards, only: %i[show create] do
+    resources :cards, only: %i[index show create] do
       post :post_message
     end
     resources :columns, only: %i[update create destroy]

@@ -70,6 +70,9 @@ group :development do
   gem 'capistrano-passenger'
   gem 'capistrano-rails', '~> 1.6', require: false
   gem 'capistrano-rvm'
+  
+  # Pretty format for console
+  gem 'hirb'
 end
 
 group :test do
@@ -96,3 +99,6 @@ gem 'mustache', '~> 1.0'
 
 # HTTP requests
 gem 'httparty'
+
+# Pagination
+gem 'pagy'

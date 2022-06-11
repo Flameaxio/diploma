@@ -12,7 +12,7 @@
 		</div>
 		<div class="ticket-list">
 			<drop @drop="insert" :class="`column-${column.id}`">
-				<drag v-for="ticket in column.cards" :data="ticket" :key="ticket.id">
+				<drag v-for="ticket in items" :data="ticket" :key="ticket.id">
 					<ticket-view :ticket="ticket" @open="$emit('open', $event)" />
 				</drag>
 			</drop>
@@ -24,7 +24,7 @@
 import { Drag, Drop } from 'vue-easy-dnd'
 import TicketView from './TicketView'
 import EditColumn from './EditColumn'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
 	components: { TicketView, Drag, Drop, EditColumn },
@@ -32,16 +32,22 @@ export default {
 		column: { type: Object, required: true }
 	},
 	computed: {
+		...mapState(['cards']),
 		ticketCount() {
-			return this.column.cards.length
+			return this.cards ? this.cards[this.column.id]?.pagy.count : 0
+		},
+		items() {
+			return this.cards[this.column.id]?.items
 		}
 	},
 	methods: {
 		...mapActions(['moveTicket', 'updateColumn']),
 		insert(el) {
 			const id = el.data.id
+			const fromId = el.data.columnId
 			const toId = el.top.$el.classList[el.top.$el.classList.length - 1].match(/\d+/g)[0]
-			this.moveTicket({ id: id, toId: toId })
+			console.log(fromId, toId)
+			this.moveTicket({ id: id, toId: toId, fromId: fromId })
 		}
 	}
 }

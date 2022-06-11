@@ -1,8 +1,27 @@
 # frozen_string_literal: true
 
+require 'pagy/extras/array'
+
 class CardsController < ApplicationController
-  before_action :load_card, except: %i[create]
-  before_action :load_workspace, only: %i[create]
+  before_action :load_card, except: %i[create index]
+  before_action :load_workspace, only: %i[create index]
+
+  def index
+    respond_to do |r|
+      r.json do
+        cards = {}
+        biggest_pagy = nil
+        @workspace.columns.find_each do |column|
+          pagy_i, items = pagy(column.cards, overflow: :empty_page, items: params[:per_page])
+          json = CardBriefSerializer.new(items).serializable_hash[:data].map { |c| c[:attributes] }
+          cards[column.id] = { items: json, pagy: pagy_i }
+          biggest_pagy = pagy_i.page > biggest_pagy&.page.to_i ? pagy_i : biggest_pagy
+        end
+        render json: { cards: cards,
+                       pagy: biggest_pagy }
+      end
+    end
+  end
 
   def show
     respond_to do |r|
