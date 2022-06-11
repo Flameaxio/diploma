@@ -8,7 +8,7 @@ export default new Vuex.Store({
 		workspace: {},
 		availableUsers: [],
 		cards: {},
-		cardsPagy: { page: 1, items: 15 },
+		cardsPagy: { page: 1, items: 30 },
 		moreToLoad: true
 	},
 	actions: {
