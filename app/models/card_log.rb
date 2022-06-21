@@ -22,7 +22,7 @@ class CardLog < ApplicationRecord
 
     url = card.column.webhook.url
     body = JSON.parse(card.column.webhook.interpolated_text(assignee: card.assignee,
-                                                            card: card)).transform_values(&:presence).compact
-    HTTParty.post(url, body: body)
+                                                            card: card)).transform_values(&:presence).compact.to_json
+    HTTParty.post(url, body: body, headers: { 'Content-Type' => 'application/json' })
   end
 end
