@@ -1,0 +1,32 @@
+services:
+  db:
+    image: mysql:latest
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: cardwalls_production
+      MYSQL_USER: flameaxe
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+  web:
+    build: .
+    command: rails s -b 0.0.0.0
+    volumes:
+      - ".:/diploma"
+    ports:
+      - "3001:3000"
+    environment:
+      DB_USER: flameaxe
+      DB_PASSWORD: password
+      DB_HOST: db
+      DB_NAME: cardwalls_production
+      SENDGRID_API_KEY: "${SENDGRID_API_KEY}"
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: 'true'
+      RAILS_SERVE_STATIC_FILES: 'true'
+    depends_on:
+      - db
+    links:
+      - db
