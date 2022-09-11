@@ -3,6 +3,9 @@ services:
     image: mysql:latest
     command: mysqld --default-authentication-plugin=mysql_native_password
     restart: always
+    volumes:
+      - db_dev:/var/lib/mysql
+      - db_mysqld_dev:/var/run/mysqld
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: cardwalls_development
@@ -11,10 +14,14 @@ services:
     ports:
       - "3307:3306"
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     command: rails s -b 0.0.0.0
     volumes:
       - ".:/diploma"
+      - "/diploma/public"
+      - "/diploma/node_modules"
     ports:
       - "3001:3000"
     environment:
@@ -30,14 +37,22 @@ services:
     links:
       - db
   asset_pipeline:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     command: bin/webpack-dev-server
     volumes:
       - ".:/diploma"
+      - "/diploma/public"
+      - "/diploma/node_modules"
     ports:
       - "3035:3035"
     depends_on:
       - db
     links:
       - db
+
+volumes:
+  db_dev:
+  db_mysqld_dev:
 

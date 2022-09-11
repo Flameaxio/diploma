@@ -10,11 +10,17 @@ services:
       MYSQL_PASSWORD: password
     ports:
       - "3307:3306"
+    volumes:
+      - db_prod:/var/lib/mysql
+      - db_mysqld_prod:/var/run/mysqld
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: rails s -b 0.0.0.0
     volumes:
-      - ".:/diploma"
+      - "./:/diploma"
+      - "/diploma/public"
     ports:
       - "3001:3000"
     environment:
@@ -30,3 +36,7 @@ services:
       - db
     links:
       - db
+
+volumes:
+  db_prod:
+  db_mysqld_prod:

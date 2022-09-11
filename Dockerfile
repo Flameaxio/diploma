@@ -1,41 +1,38 @@
-FROM node:14 AS node_base
+FROM debian:stable-slim
 
-RUN echo "NODE Version:" && node --version
-RUN echo "NPM Version:" && npm --version
+ENV ASDF_DIR="/root/.asdf"
+ENV PATH="${PATH}:/root/.asdf/shims:/root/.asdf/bin:/root/.asdf/installs/ruby/2.5.1/bin:/root/.asdf/installs/nodejs/v12.22.12/bin:root/.asdf/installs/ruby/2.5.1/lib/ruby/gems/2.5.0/gems/"
+ENV DEBIAN_FRONTEND=noninteractive
+ENV APP_HOME=/diploma
+ENV RAILS_SERVE_STATIC_FILES='true'
+ENV RAILS_ENV=production
 
-FROM ruby:2.5.1
+RUN apt-get update && \
+    apt-get -y install git netcat curl gpg autoconf make gcc g++ unzip libssl-dev locales bzip2 libreadline-dev zlib1g-dev build-essential libpq-dev default-libmysqlclient-dev
 
-RUN mkdir /usr/local/nvm
-ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 14.18.1
-RUN curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash \
-    && . $NVM_DIR/nvm.sh \
-    && nvm install $NODE_VERSION \
-    && nvm alias default $NODE_VERSION \
-    && nvm use default
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
-ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
-ENV APP_HOME /diploma
+# Install asdf
+RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+RUN echo ". /root/.asdf/asdf.sh" >> /root/.bashrc
 
-# Clear cache
-RUN apt-get clean && apt-get autoclean
+COPY .tool-versions /root/.tool-versions
+RUN asdf plugin add ruby
+RUN asdf plugin add nodejs
+RUN asdf install
 
-# Get essentials
-RUN apt-get update -qq && apt-get install --no-install-recommends -y build-essential libpq-dev
-RUN npm install -g yarn
+RUN npm i -g yarn
 
-# Clear cache again
-RUN apt-get clean && apt-get autoclean
-
-# Initialize workspace
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 ADD Gemfile $APP_HOME/Gemfile
 ADD Gemfile.lock $APP_HOME/Gemfile.lock
+
+RUN gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
+
 ADD package.json yarn.lock $APP_HOME/
 RUN yarn install
 RUN bundle install
 COPY . $APP_HOME
-RUN RAILS_ENV=production bundle exec rake assets:precompile
-CMD ["rails","server","-b","0.0.0.0"]
+RUN rails assets:precompile
+CMD ["rails", "server", "-b", "0.0.0.0"]
