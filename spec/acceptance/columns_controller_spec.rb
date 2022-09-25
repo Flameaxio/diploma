@@ -23,7 +23,7 @@ resource 'columns', controller: ColumnsController do
       puts response_body if response_status != 200
       expect(response_status).to eq(200)
 
-      expect(parsed_response.data&.attributes&.name).to eq('Tes')
+      expect(parsed_response.data&.attributes&.name).to eq('Test')
     end
   end
 end
