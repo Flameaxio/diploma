@@ -36,5 +36,6 @@ ADD package.json yarn.lock $APP_HOME/
 RUN yarn install
 RUN bundle install
 COPY . $APP_HOME
+RUN echo $RAILS_MASTER_KEY
 RUN rails assets:precompile
 CMD ["rails", "server", "-b", "0.0.0.0"]
