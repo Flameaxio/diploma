@@ -27,5 +27,5 @@ jobs:
         with:
           push: true
           tags: user/app:latest
-        env:
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
+        
