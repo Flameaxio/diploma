@@ -47,6 +47,11 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry'
+  gem 'rspec-rails'
+  gem 'rspec-api'
+  gem 'rspec_api_documentation'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do
@@ -70,7 +75,7 @@ group :development do
   gem 'capistrano-passenger'
   gem 'capistrano-rails', '~> 1.6', require: false
   gem 'capistrano-rvm'
-  
+
   # Pretty format for console
   gem 'hirb'
 end
