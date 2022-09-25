@@ -1,6 +1,6 @@
 services:
   db:
-    image: mysql:latest
+    image: mysql:8.0.30
     command: mysqld --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
