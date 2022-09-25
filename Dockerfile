@@ -37,5 +37,5 @@ RUN yarn install
 RUN bundle install
 COPY . $APP_HOME
 RUN echo $RAILS_MASTER_KEY
-RUN rails assets:precompile
+RUN --mount=type=secret,id=RAILS_MASTER_KEY export RAILS_MASTER_KEY=$(cat /run/secrets/RAILS_MASTER_KEY) && rails assets:precompile
 CMD ["rails", "server", "-b", "0.0.0.0"]
