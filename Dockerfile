@@ -6,8 +6,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV APP_HOME=/diploma
 ENV RAILS_SERVE_STATIC_FILES='true'
 ENV RAILS_ENV=production
-# Take env from github actions
-ENV RAILS_MASTER_KEY=$RAILS_MASTER_KEY
 
 RUN apt-get update && \
     apt-get -y install git netcat curl gpg autoconf make gcc g++ unzip libssl-dev locales bzip2 libreadline-dev zlib1g-dev build-essential libpq-dev default-libmysqlclient-dev
@@ -36,6 +34,5 @@ ADD package.json yarn.lock $APP_HOME/
 RUN yarn install
 RUN bundle install
 COPY . $APP_HOME
-RUN echo $RAILS_MASTER_KEY
 RUN --mount=type=secret,id=RAILS_MASTER_KEY export RAILS_MASTER_KEY=$(cat /run/secrets/RAILS_MASTER_KEY) && rails assets:precompile
 CMD ["rails", "server", "-b", "0.0.0.0"]
