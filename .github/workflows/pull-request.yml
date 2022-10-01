@@ -1,4 +1,4 @@
-name: Run tests
+name: ci
 
 on: [pull_request]
 
@@ -23,9 +23,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          # Not needed with a .ruby-version file
           ruby-version: 2.5.1
-          # runs 'bundle install' and caches installed gems automatically
           bundler-cache: true
       - name: Run tests
         env:
@@ -36,7 +34,5 @@ jobs:
           DB_NAME: cardwalls_test
         run: |
           sudo apt-get -yqq install libpq-dev
-          gem install bundler
-          bundle install --jobs 4 --retry 3
           bundle exec rails db:migrate
           bundle exec rspec
