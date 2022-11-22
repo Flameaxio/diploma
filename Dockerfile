@@ -36,8 +36,9 @@ ADD package.json yarn.lock $APP_HOME/
 RUN yarn install
 RUN bundle install
 COPY . $APP_HOME
-RUN --mount=type=secret,id=RAILS_MASTER_KEY export RAILS_MASTER_KEY=$(cat /run/secrets/RAILS_MASTER_KEY) && rails assets:precompile
+RUN --mount=type=secret,id=RAILS_MASTER_KEY export RAILS_MASTER_KEY=$(cat /run/secrets/RAILS_MASTER_KEY) && echo $RAILS_MASTER_KEY > $APP_HOME/config/master.key
+RUN rails assets:precompile
 
 EXPOSE 3000
 
-CMD --mount=type=secret,id=RAILS_MASTER_KEY export RAILS_MASTER_KEY=$(cat /run/secrets/RAILS_MASTER_KEY) && rails s -b 0.0.0.0
+CMD ["rails", "server", "-b", "0.0.0.0"]
