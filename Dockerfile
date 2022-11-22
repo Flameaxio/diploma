@@ -40,4 +40,4 @@ RUN --mount=type=secret,id=RAILS_MASTER_KEY export RAILS_MASTER_KEY=$(cat /run/s
 
 EXPOSE 3000
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD --mount=type=secret,id=RAILS_MASTER_KEY export RAILS_MASTER_KEY=$(cat /run/secrets/RAILS_MASTER_KEY) && rails s -b 0.0.0.0
