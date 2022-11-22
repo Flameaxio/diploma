@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:experimental
+
 FROM debian:stable-slim
 
 ENV ASDF_DIR="/root/.asdf"
